@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
   - resource-limit-policy.yaml  # Add all your base Kyverno policy files here
-
+  - image-registry-security.yaml
