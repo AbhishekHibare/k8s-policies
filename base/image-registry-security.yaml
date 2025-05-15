@@ -11,7 +11,7 @@ spec:
         kinds:
           - Pod
     validate:
-      message: "Only images from mytrustedregistry.com are allowed."
+      message: "Only images from 172.18.9.118:4424 are allowe"
       pattern:
         spec:
           containers:

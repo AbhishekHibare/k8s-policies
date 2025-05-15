@@ -1,0 +1,36 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-labels-and-annotations
+spec:
+  validationFailureAction: enforce
+  background: true
+  rules:
+    - name: check-required-labels
+      match:
+        resources:
+          kinds:
+            - Pod
+            - Deployment
+            - Namespace
+      validate:
+        message: "Missing required label: app.kubernetes.io/owner"
+        pattern:
+          metadata:
+            labels:
+              app.kubernetes.io/owner: "?*"
+
+    - name: check-required-annotations
+      match:
+        resources:
+          kinds:
+            - Pod
+            - Deployment
+            - Namespace
+      validate:
+        message: "Missing required annotation: audit.kubernetes.io/created-by"
+        pattern:
+          metadata:
+            annotations:
+              audit.kubernetes.io/created-by: "?*"
+
