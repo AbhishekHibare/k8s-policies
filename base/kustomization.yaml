@@ -1,0 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - resource-limit-policy.yaml  # Add all your base Kyverno policy files here
+
