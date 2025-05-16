@@ -1,0 +1,25 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-max-resources-prod
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: max-cpu-mem-limit
+      match:
+        resources:
+          kinds:
+            - Pod
+          namespaces:
+            - prod
+      validate:
+        message: "CPU limit must not exceed 500m and memory must not exceed 512Mi in the prod namespace."
+        pattern:
+          spec:
+            containers:
+              - resources:
+                  limits:
+                    cpu: "<=500m"
+                    memory: "<=512Mi"
+
